@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer with Grameen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styling for the dark theme and vibrant colors */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-color: #0a0a0a; /* Deep dark background */
+            color: #e2e8f0; /* Light gray text for contrast */
+        }
+        h1, h2, h3, h4 {
+            color: #f8fafc; /* Lighter headings */
+        }
+
+        /* Enhanced card styling with a glassy effect for the dark theme */
+        .card {
+            @apply bg-gray-900 bg-opacity-70 p-6 rounded-xl shadow-lg border-2 border-gray-700 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl;
+        }
+
+        /* Main call-to-action button styling with a vibrant gradient */
+        .button-primary {
+            @apply inline-block px-8 py-3 font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105;
+            background: linear-gradient(90deg, #00E676 0%, #00C853 100%); /* Vibrant green gradient */
+            color: #0a0a0a;
+            border: 2px solid #00E676;
+        }
+        .button-primary:hover {
+            box-shadow: 0 0 20px #00E676;
+        }
+        
+        /* Secondary button style for the API call */
+        .button-secondary {
+            @apply flex items-center px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300;
+            background-color: #3b3b3b;
+            color: #00E676;
+            border: 1px solid #00E676;
+        }
+        .button-secondary:hover {
+            background-color: #00E676;
+            color: #0a0a0a;
+        }
+
+        /* Navigation link hover effect with vibrant color */
+        .navigation {
+            @apply transition-colors duration-300;
+        }
+        .navigation:hover {
+            @apply text-[#00E676] font-bold;
+        }
+        
+        /* Parallax effect for all sections */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Specific background images for parallax sections using new placeholders */
+        .bg-volunteer-hero {
+            background-image: url('https://placehold.co/1920x1080/0d0d0d/00E676?text=Become+a+Volunteer');
+        }
+        .bg-why-volunteer {
+            background-image: url('https://placehold.co/1920x1080/1a1a1a/e2e8f0?text=Why+Volunteer');
+        }
+        .bg-how-to-join {
+            background-image: url('https://placehold.co/1920x1080/2a2a2a/e2e8f0?text=How+to+Join');
+        }
+        
+        /* Custom dark overlay for the hero section */
+        .bg-dark-overlay {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark overlay */
+        }
+
+        /* New CSS for enhanced Glassy effect with dark background */
+        .glassy-effect {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.05); /* Lighter background for glassy effect */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* --- CSS for Scroll Animations --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in-left {
+            transform: translateX(-100px);
+        }
+        .fade-in-right {
+            transform: translateX(100px);
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* --- Modal Styling --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1f2937;
+            padding: 30px;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #00E676;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #e2e8f0;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-gray-200">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 bg-opacity-70 glassy-effect shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 text-2xl font-bold text-[#00E676]">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8Z" fill="currentColor"/>
+                </svg>
+                Grameen Connect
+            </a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html#about-section" class="navigation text-lg text-gray-400">About</a>
+                <a href="index.html#projects-section" class="navigation text-lg text-gray-400">Projects</a>
+                <a href="index.html#events-section" class="navigation text-lg text-gray-400">Events</a>
+                <a href="volunteer.html" class="navigation text-lg text-[#00E676] font-bold">Volunteer</a>
+                <a href="login.html" class="button-primary">Login</a>
+            </div>
+            <!-- Hamburger menu for mobile -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-100 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile navigation links -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-lg py-2">
+            <a href="index.html#about-section" class="block px-4 py-2 text-lg text-gray-200 hover:bg-gray-700">About</a>
+            <a href="index.html#projects-section" class="block px-4 py-2 text-lg text-gray-200 hover:bg-gray-700">Projects</a>
+            <a href="index.html#events-section" class="block px-4 py-2 text-lg text-gray-200 hover:bg-gray-700">Events</a>
+            <a href="volunteer.html" class="block px-4 py-2 text-lg text-gray-200 hover:bg-gray-700">Volunteer</a>
+            <a href="login.html" class="block px-4 py-2 text-lg text-gray-200 hover:bg-gray-700">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="h-[60vh] md:h-screen flex items-center justify-center text-center p-4 bg-volunteer-hero parallax">
+            <div class="p-8 rounded-xl max-w-2xl bg-dark-overlay glassy-effect">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-md">Make a Difference. Volunteer Today.</h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-200 drop-shadow-sm">Join our network of passionate students and lend your skills to projects that matter.</p>
+            </div>
+        </section>
+
+        <!-- Why Volunteer Section -->
+        <section id="why-volunteer-section" class="py-16 md:py-24 px-4 text-center border-b border-gray-800 parallax bg-why-volunteer">
+            <div class="container mx-auto max-w-5xl animate-on-scroll fade-in-left glassy-effect p-8 rounded-xl">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Why Volunteer?</h2>
+                <p class="text-lg md:text-xl leading-relaxed mb-8 text-gray-300">
+                    Volunteering with Impact Nexus is more than just giving back. It's an opportunity to grow, learn, and connect.
+                </p>
+                <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-[#00E676]">Skill Development</h3>
+                        <p class="text-gray-400">Gain practical experience and enhance your professional skills for your future career.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-[#00E676]">Community Connection</h3>
+                        <p class="text-gray-400">Meet like-minded students and expand your network while working towards a common goal.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-[#00E676]">Real Impact</h3>
+                        <p class="text-gray-400">Contribute to tangible projects that create positive, lasting change in the community.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3 text-[#00E676]">Personal Growth</h3>
+                        <p class="text-gray-400">Build confidence, empathy, and a deeper understanding of social issues.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Volunteer Application Form Section -->
+        <section id="application-section" class="py-16 md:py-24 px-4 text-center parallax bg-how-to-join">
+            <div class="container mx-auto max-w-2xl animate-on-scroll fade-in-right glassy-effect p-8 rounded-xl">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Join Our Team</h2>
+                <p class="text-lg md:text-xl leading-relaxed mb-8 text-gray-300">
+                    Fill out the form below to begin your journey with Impact Nexus.
+                </p>
+                <form id="volunteer-form" class="mx-auto max-w-lg p-6 rounded-xl shadow-md border border-gray-700 text-gray-200 glassy-effect">
+                    <div class="mb-4">
+                        <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-md border border-gray-700 focus:ring-[#00E676] focus:border-[#00E676] bg-gray-900 text-white" required>
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" placeholder="Your Email Address" class="w-full px-4 py-3 rounded-md border border-gray-700 focus:ring-[#00E676] focus:border-[#00E676] bg-gray-900 text-white" required>
+                    </div>
+                    <div class="mb-4">
+                        <select class="w-full px-4 py-3 rounded-md border border-gray-700 focus:ring-[#00E676] focus:border-[#00E676] bg-gray-900 text-gray-400" required>
+                            <option value="">Select your area of interest...</option>
+                            <option value="environment">Environmental Projects</option>
+                            <option value="education">Educational Outreach</option>
+                            <option value="tech">Tech for Good</option>
+                            <option value="events">Event Coordination</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <textarea placeholder="Tell us a little about yourself and why you want to volunteer." rows="5" class="w-full px-4 py-3 rounded-md border border-gray-700 focus:ring-[#00E676] focus:border-[#00E676] bg-gray-900 text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="button-primary w-full">Submit Application</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-around flex-wrap p-4">
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h4 class="text-white text-lg font-semibold mb-2">Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about-section" class="hover:text-[#00E676]">About</a></li>
+                        <li><a href="index.html#projects-section" class="hover:text-[#00E676]">Projects</a></li>
+                        <li><a href="index.html#events-section" class="hover:text-[#00E676]">Events</a></li>
+                        <li><a href="volunteer.html" class="hover:text-[#00E676]">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h4 class="text-white text-lg font-semibold mb-2">Resources</h4>
+                    <ul>
+                        <li><a href="#" class="hover:text-[#00E676]">Student Guide</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">Project Kits</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">Volunteer Handbook</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">Support</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h4 class="text-white text-lg font-semibold mb-2">Connect</h4>
+                    <ul>
+                        <li><a href="#" class="hover:text-[#00E676]">Facebook</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">Instagram</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">Twitter</a></li>
+                        <li><a href="#" class="hover:text-[#00E676]">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-sm mt-4">
+                <p>&copy; 2025 Impact Nexus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Volunteer Form Success Modal -->
+    <div id="volunteer-success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('volunteer-success-modal')">&times;</span>
+            <div class="flex flex-col items-center">
+                <h3 class="text-2xl font-bold text-[#00E676] mb-4">Application Submitted!</h3>
+                <p class="text-gray-300">Thank you for your interest in volunteering with Impact Nexus. We'll review your application and be in touch soon!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript for mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- JavaScript for Scroll Animations ---
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach((element, index) => {
+            const isRight = index % 2 !== 0;
+            if (isRight) {
+                element.classList.add('fade-in-right');
+            } else {
+                element.classList.add('fade-in-left');
+            }
+            observer.observe(element);
+        });
+
+        // --- JavaScript for Volunteer Form submission with popup ---
+        const volunteerForm = document.getElementById('volunteer-form');
+        const volunteerModal = document.getElementById('volunteer-success-modal');
+
+        if (volunteerForm) {
+            volunteerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                volunteerModal.style.display = 'flex'; // Show the modal
+                volunteerForm.reset(); // Clear the form fields
+            });
+        }
+
+        // Close the modal when the user clicks on the close button or outside the modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

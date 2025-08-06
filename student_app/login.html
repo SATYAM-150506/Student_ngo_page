@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <title>Login - Student NGO Hub</title>
+  <link rel="stylesheet" href="login_signup.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Student NGO Hub</div>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects-section">Projects</a></li>
+        <li><a href="index.html.#Events">Events</a></li>
+        <li><a href="#news">Volunteer</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="login.html">Login/SignUp</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="flex: 1; display: flex; justify-content: center; align-items: center;">
+    <div class="container" id="container">
+      <div class="form-container sign-up-container">
+        <form action="#">
+          <h1>Create Account</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your email for registration</span>
+          <input type="text" placeholder="Name">
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button>Sign Up</button>
+        </form>
+      </div>
+
+      <div class="form-container sign-in-container">
+        <form action="#">
+          <h1>Sign In</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your account</span>
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <a href="https://www.google.com">Forgot Your Password?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
+
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>Enter your personal details to use all of site features</p>
+            <button class="hidden" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all of site features</p>
+            <button class="hidden" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const container = document.getElementById('container');
+    const signUpBtn = document.getElementById('signUp');
+    const signInBtn = document.getElementById('signIn');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    signUpBtn.addEventListener('click', () => {
+      container.classList.add("right-panel-active");
+    });
+
+    signInBtn.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
